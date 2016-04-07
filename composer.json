@@ -1,0 +1,22 @@
+{
+    "name": "maciejkrol/ipapicom",
+    "description": "A very simple PHP library for handling http://ip-api.com/",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Maciej Król",
+            "email": "mail@maciejkrol.pl",
+            "role": "Developer"
+        }
+    ],
+    "keywords": [
+        "ip",
+        "ip-api",
+        "geolocation"
+    ],
+    "autoload": {
+        "psr-4": {
+            "maciejkrol\\ipapicom\\": "src"
+        }
+    }
+}
