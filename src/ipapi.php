@@ -10,9 +10,9 @@ class ipapi {
         $this->key = $_key;
     }
     
-    public function locate ($ipAddress) {
+    public function locate ($_ipAddress, $_raw = false) {
                 
-        $url = $this->buildURL($ipAddress); 
+        $url = $this->buildURL($_ipAddress); 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -21,24 +21,28 @@ class ipapi {
         $data = curl_exec($curl);
         curl_close($curl);
         
-        return json_decode ($data, true);   
-    }
-    
-    private $format = 'json';
-
-    public function format ($_value = null) {
-        if ($_value === null) {
-            return $this->format;
-        } else {
-            $this->format = $_value;
-            return $this;
+        if ($_raw) {
+            return $data;
         }
+        
+        $result = json_decode ($data, true);
+        
+        if ($result === null || !isset($result['status'])) {
+            return null;
+        }
+        
+        if ($result['status'] === 'fail') {
+            return null;
+        }
+        
+        unset ($result['status']);
+        return $result;
     }
     
     private function buildURL ($_ipAddress) {
         
         $url = 'https://pro.ip-api.com/'
-            .$this->format ().'/'
+            .'json/'
             .$_ipAddress
             .'?key='.$this->key;
             
