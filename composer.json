@@ -2,7 +2,6 @@
     "name": "maciejkrol/ipapicom",
     "description": "A very simple PHP library for handling http://ip-api.com/",
     "type": "library",
-    "vesrion":"1.0.0",
     "authors": [
         {
             "name": "Maciej Król",
